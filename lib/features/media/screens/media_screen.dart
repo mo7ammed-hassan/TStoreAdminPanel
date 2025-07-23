@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
+import 'package:t_store_admin_panel/features/media/cubits/actions/media_action_cubit.dart';
+import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
+import 'package:t_store_admin_panel/features/media/screens/responsive_screens.dart/media_desktop_screen.dart';
+import 'package:t_store_admin_panel/core/utils/device/layouts/responsive_screens.dart';
+
+class MediaScreen extends StatelessWidget {
+  const MediaScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: getIt<MediaCubit>()),
+        BlocProvider.value(value: getIt<MediaActionCubit>()),
+      ],
+      child: const ResponsiveScreens(desktop: MediaDesktopScreen()),
+    );
+  }
+}

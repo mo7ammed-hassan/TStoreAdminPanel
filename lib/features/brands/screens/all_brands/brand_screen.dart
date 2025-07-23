@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
+import 'package:t_store_admin_panel/features/brands/cubits/brand_cubit.dart';
+import 'package:t_store_admin_panel/features/brands/screens/all_brands/responsive_screens/brand_desktop_screen.dart';
+import 'package:t_store_admin_panel/features/brands/screens/all_brands/responsive_screens/brand_mobile_screen.dart';
+import 'package:t_store_admin_panel/features/brands/screens/all_brands/responsive_screens/brand_tablet_screen.dart';
+import 'package:t_store_admin_panel/core/utils/device/layouts/responsive_screens.dart';
+
+class BrandScreen extends StatelessWidget {
+  const BrandScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<BrandCubit>()..fetcCategories(),
+      child: const ResponsiveScreens(
+        desktop: BrandDesktopScreen(),
+        tablet: BrandTabletScreen(),
+        mobile: BrandMobileScreen(),
+      ),
+    );
+  }
+}

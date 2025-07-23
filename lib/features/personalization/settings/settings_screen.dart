@@ -1,0 +1,18 @@
+import 'package:flutter/material.dart';
+import 'package:t_store_admin_panel/features/personalization/settings/responsive_screens/settings_desktop_screen.dart';
+import 'package:t_store_admin_panel/features/personalization/settings/responsive_screens/settings_mobile_screen.dart';
+import 'package:t_store_admin_panel/features/personalization/settings/responsive_screens/settings_tablet_screen.dart';
+import 'package:t_store_admin_panel/core/utils/device/layouts/responsive_screens.dart';
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const ResponsiveScreens(
+      desktop: SettingsDesktopScreen(),
+      tablet: SettingsTabletScreen(),
+      mobile: SettingsMobileScreen(),
+    );
+  }
+}

@@ -1,0 +1,100 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store_admin_panel/core/utils/constants/app_screens.dart';
+import 'package:t_store_admin_panel/core/utils/dialogs/show_confirmation_dialog.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/media_picker_helper.dart';
+import 'package:t_store_admin_panel/core/utils/popups/loaders.dart';
+import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
+import 'package:t_store_admin_panel/data/models/banners/banner_model.dart';
+import 'package:t_store_admin_panel/features/banners/cubits/edit_banner/edit_banner_states.dart';
+
+class EditBannerCubit extends Cubit<EditBannerStates> {
+  EditBannerCubit(this._repository) : super(EditBannerInitialState());
+
+  final GenericRepository<BannerModel> _repository;
+
+  String? imageUrl = '';
+  bool active = false;
+  String targetScreen = AppScreens.allAppScreens[0];
+  BannerModel oldBanner = BannerModel.empty();
+
+  void init(BannerModel banner) {
+    oldBanner = banner;
+    imageUrl = banner.image;
+    active = banner.active;
+    targetScreen = banner.targetScreen;
+  }
+
+  Future<void> editBanner() async {
+    emit(EditBannerLoadingState());
+    if (imageUrl == null || imageUrl!.isEmpty) {
+      Loaders.warningSnackBar(
+        title: 'Error',
+        message: 'Please select an image',
+      );
+      return;
+    }
+
+    CustomDialogs.showCircularLoader();
+
+    // Mapping the old banner to the new one
+    final updatedBanner = oldBanner.copyWith(
+      image: imageUrl,
+      active: active,
+      targetScreen: targetScreen,
+    );
+
+    if (BannerModel.isSameModel(updatedBanner, oldBanner)) {
+      CustomDialogs.hideLoader();
+      Loaders.warningSnackBar(
+        message: 'No changes detected!',
+        title: 'Warning',
+      );
+      return;
+    }
+
+    final result = await _repository.updateItem(updatedBanner);
+
+    result.fold(
+      (error) {
+        CustomDialogs.hideLoader();
+        Loaders.errorSnackBar(
+          title: 'Error',
+          message: 'Failed to create banner: ${error.toString()}',
+        );
+        emit(EditBannerErrorState(error.toString()));
+      },
+      (_) async {
+        CustomDialogs.hideLoader();
+        Loaders.successSnackBar(
+          title: 'Congratulations',
+          message: 'Banner created successfully',
+        );
+        emit(EditBannerSuccessState(updatedBanner));
+      },
+    );
+  }
+
+  void toggleActive(bool value) {
+    active = value;
+    emit(ToggleActiveState(active));
+  }
+
+  Future<void> pickImage() async {
+    imageUrl = await MediaPickerHelper.pickAndUpdateImage<PickImageState>(
+      imageUrl,
+      (selectedImage) => emit(PickImageState(selectedImage ?? '')),
+    );
+  }
+
+  void setTargetScreen(String screen) {
+    targetScreen = screen;
+    emit(TargetScreenState(targetScreen));
+  }
+
+  void resetForm() {
+    imageUrl = null;
+    active = false;
+    targetScreen = AppScreens.allAppScreens[0];
+    emit(EditBannerInitialState());
+  }
+}
