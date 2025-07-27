@@ -39,7 +39,7 @@ class FullScreenLoaderWidget {
 
   /// Stop the currently open loading dialog.
   /// This method doesn't return anything.
-  static stopLoading() {
+  static void stopLoading() {
     AppContext.overlayContext.popPage(AppContext.overlayContext);
   }
 }

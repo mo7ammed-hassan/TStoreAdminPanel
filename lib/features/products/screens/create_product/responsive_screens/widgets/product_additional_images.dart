@@ -86,7 +86,7 @@ class ProductAdditionalImages extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: additionalProductImagesUrls.length,
       separatorBuilder:
-          (_, __) => const SizedBox(width: AppSizes.spaceBtwItems / 2),
+          (_, _) => const SizedBox(width: AppSizes.spaceBtwItems / 2),
       itemBuilder: (context, index) {
         return _buildThumbnailItem(index);
       },
@@ -113,9 +113,9 @@ class ProductAdditionalImages extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: 4,
       separatorBuilder:
-          (_, __) => const SizedBox(width: AppSizes.spaceBtwItems / 2),
+          (_, _) => const SizedBox(width: AppSizes.spaceBtwItems / 2),
       itemBuilder:
-          (_, __) => RoundedContainer(
+          (_, _) => RoundedContainer(
             width: 80,
             height: 80,
             backgroundColor:

@@ -71,7 +71,7 @@ class TRoundedImage extends StatelessWidget {
     );
   }
 
-  _buildImageWidget(isDark) {
+  ClipRRect _buildImageWidget(bool isDark) {
     Widget imageWidget;
 
     switch (imageType) {
@@ -147,7 +147,7 @@ class TRoundedImage extends StatelessWidget {
     }
   }
 
-  Widget _buildAssetImage(isDark) {
+  Widget _buildAssetImage(bool isDark) {
     if (image != null && image!.isNotEmpty) {
       // Display image from asset
       return Image(fit: fit, image: AssetImage(image!), color: overlayColor);

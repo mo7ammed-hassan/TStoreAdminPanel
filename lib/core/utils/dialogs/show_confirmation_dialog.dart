@@ -5,7 +5,7 @@ import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/core/utils/loaders/circular_loader.dart';
 
 class CustomDialogs {
-  static showConfirmationDialog({
+  static Future<bool?> showConfirmationDialog({
     required String title,
     required String message,
     required String confirmButtonText,

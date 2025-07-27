@@ -81,7 +81,7 @@ class _VariationsListView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: variations.length,
             separatorBuilder:
-                (_, __) => const SizedBox(height: AppSizes.spaceBtwItems),
+                (_, _) => const SizedBox(height: AppSizes.spaceBtwItems),
             itemBuilder: (context, index) {
               final variation = variations[index];
               return VariationItem(

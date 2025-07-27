@@ -135,7 +135,7 @@ abstract class BaseDataTableCubit<T extends HasId>
       cancelButtonText: 'Cancel',
     );
 
-    if (result) {
+    if (result == true) {
       await deleteItemOnConfirmation(item);
     }
   }

@@ -278,9 +278,9 @@ class CreateProductCubit extends Cubit<CreateProductStates> {
         await mediaCubit.selectionImagesFromMedia();
 
     // Handle selected images
-    if (selectedImages != null && selectedImages.isNotEmpty) {
+    if (selectedImages?.isNotEmpty ?? false) {
       // set the selected image to the main image
-      ImageModel selectedImage = selectedImages.first;
+      ImageModel selectedImage = selectedImages!.first;
       // update selected thumbnail image
       thumbnail = selectedImage.url;
 
@@ -490,9 +490,9 @@ class CreateProductCubit extends Cubit<CreateProductStates> {
         await mediaCubit.selectionImagesFromMedia();
 
     // Handle selected images
-    if (selectedImages != null && selectedImages.isNotEmpty) {
+    if (selectedImages?.isNotEmpty ?? false) {
       // set the selected image to the main image
-      ImageModel selectedImage = selectedImages.first;
+      ImageModel selectedImage = selectedImages!.first;
       // update selected thumbnail image
       variation.image = selectedImage.url;
 

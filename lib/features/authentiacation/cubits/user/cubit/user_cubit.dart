@@ -36,7 +36,7 @@ class UserCubit extends Cubit<UserState> {
       cancelButtonText: 'Cancel',
     );
 
-    if (result) {
+    if (result == true) {
       await signOut();
     }
   }

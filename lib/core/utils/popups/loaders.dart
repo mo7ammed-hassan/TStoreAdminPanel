@@ -7,10 +7,10 @@ import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
 
 class Loaders {
-  static hideSnackBar() =>
+  static void hideSnackBar() =>
       ScaffoldMessenger.of(AppContext.context).hideCurrentSnackBar();
 
-  static customToast({required message, bool isMedium = true}) {
+  static void customToast({required String message, bool isMedium = true}) {
     ScaffoldMessenger.of(AppContext.context).showSnackBar(
       SnackBar(
         width:
@@ -46,7 +46,7 @@ class Loaders {
     );
   }
 
-  static successSnackBar({
+  static void successSnackBar({
     required String title,
     String message = '',
     int duration = 3,
@@ -54,11 +54,11 @@ class Loaders {
     _showSnackBar(title, message, AppColors.primary, Iconsax.check);
   }
 
-  static warningSnackBar({required String title, String message = ''}) {
+  static void warningSnackBar({required String title, String message = ''}) {
     _showSnackBar(title, message, Colors.orange, Iconsax.warning_2);
   }
 
-  static errorSnackBar({required String title, String message = ''}) {
+  static void errorSnackBar({required String title, String message = ''}) {
     _showSnackBar(title, message, Colors.red.shade600, Iconsax.warning_2);
   }
 

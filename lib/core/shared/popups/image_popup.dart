@@ -145,7 +145,7 @@ class ImagePopup extends StatelessWidget {
     );
   }
 
-  void _buildDeleteListener(context, state) {
+  void _buildDeleteListener(BuildContext context, state) {
     if (state is DeleteImageLoadingState) {
       // close image dialog
       if (context.mounted) Navigator.pop(context);

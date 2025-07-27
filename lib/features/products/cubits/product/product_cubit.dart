@@ -62,7 +62,7 @@ class ProductCubit extends Cubit<ProductState> {
       cancelButtonText: 'Cancel',
     );
 
-    if (result) {
+    if (result == true) {
       await deleteItemOnConfirmation(product);
     }
   }
